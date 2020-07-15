@@ -2,6 +2,7 @@
 find_package(GTest REQUIRED)
 
 
+
 enable_testing()
 
 set(UT squareRootTest)
@@ -23,3 +24,6 @@ target_link_libraries(${UT}
     ${GTEST_LIBRARIES}
     pthread
     )
+
+include(CodeCoverage)
+setup_target_for_coverage_lcov(NAME ${UT}_coverage ${UT})

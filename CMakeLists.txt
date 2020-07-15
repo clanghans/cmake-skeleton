@@ -6,9 +6,12 @@ include(CTest)
 set(CMAKE_VERBOSE_MAKEFILE TRUE)
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
+set(CMAKE_BUILD_TYPE Debug)
+LIST(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
+
 # add code coverage INTERFACE target and set compiler options
 add_library(test-profiling INTERFACE)
-target_compile_options(test-profiling INTERFACE "--coverage")
+target_compile_options(test-profiling INTERFACE "--coverage" "-O0")
 target_link_libraries(test-profiling INTERFACE "gcov")
 
 # Recurse into the "Hello" and "Demo" subdirectories. This does not actually
