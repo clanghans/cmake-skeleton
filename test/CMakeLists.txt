@@ -1,29 +1,18 @@
-# Locate GTest
-find_package(GTest REQUIRED)
-
-
 
 enable_testing()
 
-set(UT squareRootTest)
+include(coverage)
 
-add_executable(${UT}
-    ${UT}.cpp)
-
-gtest_discover_tests(${UT})
-add_test(${UT} ${UT})
-
-target_include_directories(${UT}
-    PUBLIC
-    ../src
-    ${GTEST_INCLUDE_DIRS}
+unit_test(NAME squareRootTest
+    SRC squareRootTest.cpp
+    INCLUDE ../src
+    COVERAGE
     )
 
-target_link_libraries(${UT}
-    test-profiling
-    ${GTEST_LIBRARIES}
-    pthread
+unit_test(NAME calcTest
+    SRC calcTest.cpp
+    INCLUDE ../src
+    COVERAGE
     )
 
-include(CodeCoverage)
-setup_target_for_coverage_lcov(NAME ${UT}_coverage ${UT})
+coverage(EXCLUDE "/usr/include/c++/7/**" "/usr/include/gtest/**/" "test/*")
